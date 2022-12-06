@@ -1,18 +1,21 @@
 package main
 
+import (
+	"encoding/json"
+	"net/http"
+)
+
 type jsonResponse struct{
 	Error bool `json:"error"`
 	Message string `json:"message"`
-	data any `json:"data,omitempty"`
+	// data interface{} `json:"data,omitempty"`
 }
 
 func (app *Config) Broker(w http.ResponseWriter, r *http.Request){
 	payload:=jsonResponse{
-		Error: "none",
+		Error:false,
 		Message:"Hey",
-		data:{
-			name:"neha",
-		},
+		
 	}
 
 	out, _:=json.MarshalIndent(payload,"", "\t")
